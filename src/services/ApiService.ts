@@ -36,7 +36,7 @@ export class ApiService {
 
   static async getRole() {
     const encryptedRole = localStorage.getItem("role");
-    return encryptedRole ? this.decrypt(encryptedRole) : null;
+    return encryptedRole ? await this.decrypt(encryptedRole) : null;
   }
 
   static async clearStorage() {
@@ -334,5 +334,20 @@ export class ApiService {
       }
     );
     return response.data;
+  }
+
+  //CHEACK AUTH
+  static logout() {
+    this.clearStorage();
+  }
+
+  static isAuthenticated() {
+    const token = this.getToken();
+    return !!token;
+  }
+
+  static async isAdmin() {
+    const role = await this.getRole();
+    return role === "ADMIN";
   }
 }
