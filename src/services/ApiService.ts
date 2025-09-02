@@ -1,6 +1,11 @@
 import axios from "axios";
 import CryptoUtil from "./CryptoService";
-import type { LoginData, ProductForm, RegisterData } from "../types";
+import type {
+  LoginData,
+  ProductForm,
+  RegisterData,
+  SupplierForm,
+} from "../types";
 
 export class ApiService {
   static BASE_URL = import.meta.env.VITE_API_URL;
@@ -193,6 +198,56 @@ export class ApiService {
   static async deleteCategory(categoryId: number) {
     const response = await axios.delete(
       `${this.BASE_URL}/categories/${categoryId}`,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  /**Supplier EDNPOINTS */
+  static async addSupplier(supplierData: SupplierForm) {
+    const response = await axios.post(
+      `${this.BASE_URL}/suppliers`,
+      supplierData,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  static async getAllSuppliers() {
+    const response = await axios.get(`${this.BASE_URL}/suppliers`, {
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
+
+  static async getSupplierById(supplierId: number) {
+    const response = await axios.get(
+      `${this.BASE_URL}/suppliers/${supplierId}`,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  static async updateSupplier(supplierId: number, supplierData: SupplierForm) {
+    const response = await axios.put(
+      `${this.BASE_URL}/suppliers/${supplierId}`,
+      supplierData,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  static async deleteSupplier(supplierId: number) {
+    const response = await axios.delete(
+      `${this.BASE_URL}/suppliers/${supplierId}`,
       {
         headers: this.getHeader(),
       }

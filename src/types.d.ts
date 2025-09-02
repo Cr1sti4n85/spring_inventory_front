@@ -25,3 +25,11 @@ export interface ProductForm {
   categoryId: string;
   // image: FileList | null; // in case there are multiple images
 }
+
+//Supplier
+
+export interface SupplierForm {
+  name: string;
+  email: string;
+  address: string;
+}
