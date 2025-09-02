@@ -1,6 +1,6 @@
 import axios from "axios";
 import CryptoUtil from "./CryptoService";
-import type { LoginData, RegisterData } from "../types";
+import type { LoginData, ProductForm, RegisterData } from "../types";
 
 export class ApiService {
   static BASE_URL = import.meta.env.VITE_API_URL;
@@ -97,6 +97,60 @@ export class ApiService {
     const response = await axios.delete(`${this.BASE_URL}/users/${userId}`, {
       headers: this.getHeader(),
     });
+    return response.data;
+  }
+
+  /**PRODUCT ENDPOINTS */
+
+  static async addProduct(formData: ProductForm) {
+    const response = await axios.post(`${this.BASE_URL}/products`, formData, {
+      headers: {
+        ...this.getHeader(),
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  }
+
+  static async updateProduct(formData: ProductForm) {
+    const response = await axios.put(`${this.BASE_URL}/products`, formData, {
+      headers: {
+        ...this.getHeader(),
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  }
+
+  static async getAllProducts() {
+    const response = await axios.get(`${this.BASE_URL}/products`, {
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
+
+  static async getProductById(productId: number) {
+    const response = await axios.get(`${this.BASE_URL}/products/${productId}`, {
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
+
+  static async searchProduct(searchValue: string) {
+    const response = await axios.get(`${this.BASE_URL}/products/search`, {
+      params: { searchValue },
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
+
+  static async deleteProduct(productId: number) {
+    const response = await axios.delete(
+      `${this.BASE_URL}/products/${productId}`,
+      {
+        headers: this.getHeader(),
+      }
+    );
     return response.data;
   }
 }
