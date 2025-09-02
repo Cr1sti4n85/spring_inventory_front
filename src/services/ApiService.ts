@@ -5,6 +5,7 @@ import type {
   ProductForm,
   RegisterData,
   SupplierForm,
+  TransactionData,
 } from "../types";
 
 export class ApiService {
@@ -248,6 +249,86 @@ export class ApiService {
   static async deleteSupplier(supplierId: number) {
     const response = await axios.delete(
       `${this.BASE_URL}/suppliers/${supplierId}`,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  /**Transactions EDNPOINTS */
+  static async purchaseProduct(transactionData: TransactionData) {
+    const response = await axios.post(
+      `${this.BASE_URL}/transactions/purchases`,
+      transactionData,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  static async sellProduct(transactionData: TransactionData) {
+    const response = await axios.post(
+      `${this.BASE_URL}/transactions/sales`,
+      transactionData,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  static async returnToSupplier(transactionData: TransactionData) {
+    const response = await axios.post(
+      `${this.BASE_URL}/transactions/returns`,
+      transactionData,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  static async getAllTransactions(filter: string) {
+    const response = await axios.get(`${this.BASE_URL}/transactions`, {
+      headers: this.getHeader(),
+      params: { filter },
+    });
+    return response.data;
+  }
+
+  static async geTransactionsByMonthAndYear(month: number, year: number) {
+    const response = await axios.get(
+      `${this.BASE_URL}/transactions/by-month-year`,
+      {
+        headers: this.getHeader(),
+        params: {
+          month,
+          year,
+        },
+      }
+    );
+    return response.data;
+  }
+
+  static async getTransactionById(transactionId: number) {
+    const response = await axios.get(
+      `${this.BASE_URL}/transactions/${transactionId}`,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  static async updateTransactionStatus(
+    transactionId: number,
+    transactionData: Partial<TransactionData>
+  ) {
+    const response = await axios.put(
+      `${this.BASE_URL}/transactions/${transactionId}`,
+      transactionData,
       {
         headers: this.getHeader(),
       }

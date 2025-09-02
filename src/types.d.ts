@@ -33,3 +33,13 @@ export interface SupplierForm {
   email: string;
   address: string;
 }
+
+//Transaction
+export interface TransactionData {
+  productId: number;
+  quantity: number;
+  supplierId?: number; // Optional for sales
+  description?: string;
+  note?: string;
+  status?: string; //for updates
+}
