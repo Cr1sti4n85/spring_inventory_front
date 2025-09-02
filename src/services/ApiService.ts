@@ -153,4 +153,50 @@ export class ApiService {
     );
     return response.data;
   }
+
+  /**CATEGOTY EDNPOINTS */
+  static async createCategory(category: string) {
+    const response = await axios.post(`${this.BASE_URL}/categories`, category, {
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
+
+  static async getAllCategory() {
+    const response = await axios.get(`${this.BASE_URL}/categories`, {
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
+
+  static async getCategoryById(categoryId: number) {
+    const response = await axios.get(
+      `${this.BASE_URL}/categories/${categoryId}`,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  static async updateCategory(categoryId: number, categoryData: string) {
+    const response = await axios.put(
+      `${this.BASE_URL}/categories/${categoryId}`,
+      categoryData,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
+
+  static async deleteCategory(categoryId: number) {
+    const response = await axios.delete(
+      `${this.BASE_URL}/categories/${categoryId}`,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    return response.data;
+  }
 }
