@@ -38,3 +38,17 @@
   margin: 15px 0;
   transition: transform 0.2s ease-in-out;
 }
+
+/* Layout */
+.layout {
+  display: flex;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.main-content {
+  margin-left: 12%;
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
