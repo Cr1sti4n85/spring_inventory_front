@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { type AxiosResponse } from "axios";
 import CryptoUtil from "./CryptoService";
 import type {
   LoginData,
@@ -8,7 +8,7 @@ import type {
   TransactionData,
 } from "../types";
 
-export class ApiService {
+export default class ApiService {
   static BASE_URL = import.meta.env.VITE_API_URL;
 
   static encrypt(data: string) {
@@ -55,7 +55,7 @@ export class ApiService {
   /**  AUTH & USERS API */
 
   static async registerUser(registerData: RegisterData) {
-    const response = await axios.post(
+    const response: AxiosResponse = await axios.post(
       `${this.BASE_URL}/auth/register`,
       registerData
     );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router";
-import { ApiService } from "./ApiService";
+import ApiService from "./ApiService";
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
