@@ -52,3 +52,34 @@
   padding: 20px;
   transition: margin-left 0.3s ease;
 }
+
+/* PAGENATION STYLING */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  background-color: #555;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #2f4f4f;
+}
+
+.pagination-button.active {
+  background-color: #008080;
+  color: white;
+  font-weight: bold;
+}
+
+.pagination-button:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
