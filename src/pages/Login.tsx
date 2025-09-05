@@ -3,27 +3,32 @@ import { useNavigate } from "react-router";
 import ApiService from "../services/ApiService";
 import axios from "axios";
 
-const Register: FC = () => {
-  const [name, setName] = useState<string>("");
+const Login: FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [message, setMessage] = useState<string>("");
 
   const navigate = useNavigate();
 
-  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const registerData = { name, email, password, phoneNumber };
-      await ApiService.registerUser(registerData);
-      setMessage("Registration Successfull");
-      navigate("/login");
-    } catch (error: unknown) {
+      const loginData = { email, password };
+      const res = await ApiService.loginUser(loginData);
+
+      console.log(res);
+
+      if (res.status === 200) {
+        ApiService.saveToken(res.token);
+        ApiService.saveRole(res.role);
+        setMessage(res.message);
+        navigate("/dashboard");
+      }
+    } catch (error) {
       if (axios.isAxiosError(error)) {
         showMessage(error.response?.data?.message);
       } else {
-        showMessage("Error al registrar usuario: " + error);
+        showMessage("Error al iniciar sesión: " + error);
       }
     }
   };
@@ -37,19 +42,11 @@ const Register: FC = () => {
 
   return (
     <div className="auth-container">
-      <h2>Registro</h2>
+      <h2>Login</h2>
 
       {message && <p className="message">{message}</p>}
 
-      <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Nombre"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-
+      <form onSubmit={handleLogin}>
         <input
           type="email"
           placeholder="Email"
@@ -66,20 +63,12 @@ const Register: FC = () => {
           required
         />
 
-        <input
-          type="text"
-          placeholder="Número de teléfono"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-          required
-        />
-
-        <button type="submit">Enviar</button>
+        <button type="submit">Iniciar sesión</button>
       </form>
       <p>
-        ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
+        ¿No tienes cuenta? <a href="/register">Registrarse</a>
       </p>
     </div>
   );
 };
-export default Register;
+export default Login;
