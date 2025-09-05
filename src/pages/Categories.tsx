@@ -31,7 +31,7 @@ const Categories: FC = () => {
       }
     };
     getCategories();
-  }, []);
+  }, [message]);
 
   //add category
   const addCategory = async () => {
@@ -43,7 +43,6 @@ const Categories: FC = () => {
       await ApiService.createCategory({ name: categoryName });
       showMessage("Categoría añadida con éxito");
       setCategoryName(""); //clear input
-      window.location.reload(); //relode page
     } catch (error) {
       if (axios.isAxiosError(error)) {
         showMessage(error.response?.data?.message);
@@ -62,7 +61,6 @@ const Categories: FC = () => {
       showMessage("Categoría actualizada con éxito");
       setIsEditing(false);
       setCategoryName(""); //clear input
-      window.location.reload(); //relode page
     } catch (error) {
       if (axios.isAxiosError(error)) {
         showMessage(error.response?.data?.message);
@@ -85,7 +83,6 @@ const Categories: FC = () => {
       try {
         await ApiService.deleteCategory(categoryId);
         showMessage("Categoría eliminada con éxito");
-        window.location.reload(); //relode page
       } catch (error) {
         if (axios.isAxiosError(error)) {
           showMessage(error.response?.data?.message);
