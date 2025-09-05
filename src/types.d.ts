@@ -43,3 +43,13 @@ export interface TransactionData {
   note?: string;
   status?: string; //for updates
 }
+
+//Category
+export interface CategoryData {
+  name: string;
+}
+
+export interface Category {
+  id: number;
+  name: string;
+}

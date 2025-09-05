@@ -1,6 +1,7 @@
 import axios, { type AxiosResponse } from "axios";
 import CryptoUtil from "./CryptoService";
 import type {
+  CategoryData,
   LoginData,
   ProductForm,
   RegisterData,
@@ -24,9 +25,9 @@ export default class ApiService {
     localStorage.setItem("auth_token", encryptedToken);
   }
 
-  static getToken() {
+  static async getToken() {
     const encryptedToken = localStorage.getItem("auth_token");
-    return encryptedToken ? this.decrypt(encryptedToken) : null;
+    return encryptedToken ? await this.decrypt(encryptedToken) : null;
   }
 
   static async saveRole(role: string) {
@@ -44,8 +45,8 @@ export default class ApiService {
     localStorage.removeItem("role");
   }
 
-  static getHeader() {
-    const token = this.getToken();
+  static async getHeader() {
+    const token = await this.getToken();
     return {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
@@ -69,21 +70,21 @@ export default class ApiService {
 
   static async getAllUsers() {
     const response = await axios.get(`${this.BASE_URL}/users`, {
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
     });
     return response.data;
   }
 
   static async getLoggedInUserInfo() {
     const response = await axios.get(`${this.BASE_URL}/users/me`, {
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
     });
     return response.data;
   }
 
   static async getUserById(userId: number) {
     const response = await axios.get(`${this.BASE_URL}/users/${userId}`, {
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
     });
     return response.data;
   }
@@ -93,7 +94,7 @@ export default class ApiService {
       `${this.BASE_URL}/users/${userId}`,
       userData,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -101,7 +102,7 @@ export default class ApiService {
 
   static async deleteUser(userId: number) {
     const response = await axios.delete(`${this.BASE_URL}/users/${userId}`, {
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
     });
     return response.data;
   }
@@ -111,7 +112,7 @@ export default class ApiService {
   static async addProduct(formData: ProductForm) {
     const response = await axios.post(`${this.BASE_URL}/products`, formData, {
       headers: {
-        ...this.getHeader(),
+        ...(await this.getHeader()),
         "Content-Type": "multipart/form-data",
       },
     });
@@ -121,7 +122,7 @@ export default class ApiService {
   static async updateProduct(formData: ProductForm) {
     const response = await axios.put(`${this.BASE_URL}/products`, formData, {
       headers: {
-        ...this.getHeader(),
+        ...(await this.getHeader()),
         "Content-Type": "multipart/form-data",
       },
     });
@@ -130,14 +131,14 @@ export default class ApiService {
 
   static async getAllProducts() {
     const response = await axios.get(`${this.BASE_URL}/products`, {
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
     });
     return response.data;
   }
 
   static async getProductById(productId: number) {
     const response = await axios.get(`${this.BASE_URL}/products/${productId}`, {
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
     });
     return response.data;
   }
@@ -145,7 +146,7 @@ export default class ApiService {
   static async searchProduct(searchValue: string) {
     const response = await axios.get(`${this.BASE_URL}/products/search`, {
       params: { searchValue },
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
     });
     return response.data;
   }
@@ -154,23 +155,23 @@ export default class ApiService {
     const response = await axios.delete(
       `${this.BASE_URL}/products/${productId}`,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
   }
 
   /**CATEGOTY EDNPOINTS */
-  static async createCategory(category: string) {
+  static async createCategory(category: CategoryData) {
     const response = await axios.post(`${this.BASE_URL}/categories`, category, {
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
     });
     return response.data;
   }
 
   static async getAllCategory() {
     const response = await axios.get(`${this.BASE_URL}/categories`, {
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
     });
     return response.data;
   }
@@ -179,18 +180,18 @@ export default class ApiService {
     const response = await axios.get(
       `${this.BASE_URL}/categories/${categoryId}`,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
   }
 
-  static async updateCategory(categoryId: number, categoryData: string) {
+  static async updateCategory(categoryId: number, categoryData: CategoryData) {
     const response = await axios.put(
       `${this.BASE_URL}/categories/${categoryId}`,
       categoryData,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -200,7 +201,7 @@ export default class ApiService {
     const response = await axios.delete(
       `${this.BASE_URL}/categories/${categoryId}`,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -212,7 +213,7 @@ export default class ApiService {
       `${this.BASE_URL}/suppliers`,
       supplierData,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -220,7 +221,7 @@ export default class ApiService {
 
   static async getAllSuppliers() {
     const response = await axios.get(`${this.BASE_URL}/suppliers`, {
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
     });
     return response.data;
   }
@@ -229,7 +230,7 @@ export default class ApiService {
     const response = await axios.get(
       `${this.BASE_URL}/suppliers/${supplierId}`,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -240,7 +241,7 @@ export default class ApiService {
       `${this.BASE_URL}/suppliers/${supplierId}`,
       supplierData,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -250,7 +251,7 @@ export default class ApiService {
     const response = await axios.delete(
       `${this.BASE_URL}/suppliers/${supplierId}`,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -262,7 +263,7 @@ export default class ApiService {
       `${this.BASE_URL}/transactions/purchases`,
       transactionData,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -273,7 +274,7 @@ export default class ApiService {
       `${this.BASE_URL}/transactions/sales`,
       transactionData,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -284,7 +285,7 @@ export default class ApiService {
       `${this.BASE_URL}/transactions/returns`,
       transactionData,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -292,7 +293,7 @@ export default class ApiService {
 
   static async getAllTransactions(filter: string) {
     const response = await axios.get(`${this.BASE_URL}/transactions`, {
-      headers: this.getHeader(),
+      headers: await this.getHeader(),
       params: { filter },
     });
     return response.data;
@@ -302,7 +303,7 @@ export default class ApiService {
     const response = await axios.get(
       `${this.BASE_URL}/transactions/by-month-year`,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
         params: {
           month,
           year,
@@ -316,7 +317,7 @@ export default class ApiService {
     const response = await axios.get(
       `${this.BASE_URL}/transactions/${transactionId}`,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -330,7 +331,7 @@ export default class ApiService {
       `${this.BASE_URL}/transactions/${transactionId}`,
       transactionData,
       {
-        headers: this.getHeader(),
+        headers: await this.getHeader(),
       }
     );
     return response.data;
@@ -346,7 +347,7 @@ export default class ApiService {
     return !!token;
   }
 
-  static async isAdmin() {
+  static async isAdmin(): Promise<boolean> {
     const role = await this.getRole();
     return role === "ADMIN";
   }

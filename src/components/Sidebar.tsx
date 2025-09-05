@@ -1,6 +1,6 @@
 import { useEffect, useState, type FC } from "react";
 import { Link } from "react-router";
-import { ApiService } from "../services/ApiService";
+import ApiService from "../services/ApiService";
 
 const logout = () => {
   ApiService.logout();

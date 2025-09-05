@@ -27,7 +27,12 @@ export const AdminRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
     checkAdmin();
   }, []);
+
   const location = useLocation();
+
+  if (isAdmin === null) {
+    return <div>Loading...</div>; // or a spinner
+  }
   return isAdmin ? (
     children
   ) : (
