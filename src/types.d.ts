@@ -38,6 +38,18 @@ export interface Supplier extends SupplierForm {
   id: number;
 }
 
+export interface SuppliersResponse {
+  status: number;
+  message: string;
+  suppliers: Supplier[];
+}
+
+export interface SupplierResponse {
+  status: number;
+  message: string;
+  supplier: Supplier;
+}
+
 //Transaction
 export interface TransactionData {
   productId: number;

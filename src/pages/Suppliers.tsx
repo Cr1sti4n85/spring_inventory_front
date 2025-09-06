@@ -11,7 +11,7 @@ const Suppliers = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    //fetech all suppliers
+    //fetch all suppliers
     const getSuppliers = async () => {
       try {
         const responseData = await ApiService.getAllSuppliers();

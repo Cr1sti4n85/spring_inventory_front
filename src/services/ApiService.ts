@@ -6,6 +6,8 @@ import type {
   ProductForm,
   RegisterData,
   SupplierForm,
+  SupplierResponse,
+  SuppliersResponse,
   TransactionData,
 } from "../types";
 
@@ -220,14 +222,17 @@ export default class ApiService {
   }
 
   static async getAllSuppliers() {
-    const response = await axios.get(`${this.BASE_URL}/suppliers`, {
-      headers: await this.getHeader(),
-    });
+    const response = await axios.get<SuppliersResponse>(
+      `${this.BASE_URL}/suppliers`,
+      {
+        headers: await this.getHeader(),
+      }
+    );
     return response.data;
   }
 
   static async getSupplierById(supplierId: number) {
-    const response = await axios.get(
+    const response = await axios.get<SupplierResponse>(
       `${this.BASE_URL}/suppliers/${supplierId}`,
       {
         headers: await this.getHeader(),

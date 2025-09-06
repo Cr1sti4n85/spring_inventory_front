@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import { AdminRoute } from "./services/Guard";
 import Categories from "./pages/Categories";
 import Suppliers from "./pages/Suppliers";
+import AddEditSupplier from "./pages/AddEditSupplier";
 
 function App() {
   return (
@@ -25,6 +26,22 @@ function App() {
           element={
             <AdminRoute>
               <Suppliers />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/add-supplier"
+          element={
+            <AdminRoute>
+              <AddEditSupplier />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/edit-supplier/:supplierId"
+          element={
+            <AdminRoute>
+              <AddEditSupplier />
             </AdminRoute>
           }
         />
