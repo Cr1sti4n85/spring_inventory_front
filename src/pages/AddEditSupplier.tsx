@@ -30,7 +30,7 @@ const AddEditSupplier: FC = () => {
           if (axios.isAxiosError(error)) {
             showMessage(error.response?.data?.message);
           } else {
-            showMessage("Error al obtener proveedores: " + error);
+            showMessage("Error al obtener proveedor: " + error);
           }
         }
       };
@@ -46,15 +46,15 @@ const AddEditSupplier: FC = () => {
     try {
       if (isEditing) {
         if (!supplierId) {
-          showMessage("Invalid supplier ID");
+          showMessage("ID de proveedor no válido");
           return;
         }
         await ApiService.updateSupplier(+supplierId, supplierData);
-        showMessage("Supplier Edited succesfully");
+        showMessage("Proveedor actualizado con éxito");
         navigate("/supplier");
       } else {
         await ApiService.addSupplier(supplierData);
-        showMessage("Supplier Added succesfully");
+        showMessage("Proveedor agregado con éxito");
         navigate("/supplier");
       }
     } catch (error) {
@@ -78,11 +78,11 @@ const AddEditSupplier: FC = () => {
     <Layout>
       {message && <div className="message">{message}</div>}
       <div className="supplier-form-page">
-        <h1>{isEditing ? "Edit Supplier" : "Add Supplier"}</h1>
+        <h1>{isEditing ? "Editar Proveedor" : "Añadir Proveedor"}</h1>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Supplier Name</label>
+            <label>Nombre del proveedor</label>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -92,7 +92,7 @@ const AddEditSupplier: FC = () => {
           </div>
 
           <div className="form-group">
-            <label>Contact Info</label>
+            <label>Email de contacto</label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -102,7 +102,7 @@ const AddEditSupplier: FC = () => {
           </div>
 
           <div className="form-group">
-            <label>Address</label>
+            <label>Dirección</label>
             <input
               value={address}
               onChange={(e) => setAddress(e.target.value)}
@@ -111,7 +111,7 @@ const AddEditSupplier: FC = () => {
             />
           </div>
           <button type="submit">
-            {isEditing ? "Edit Supplier" : "Add Supplier"}
+            {isEditing ? "Editar proveedor" : "Añadir proveedor"}
           </button>
         </form>
       </div>
