@@ -34,6 +34,10 @@ export interface SupplierForm {
   address: string;
 }
 
+export interface Supplier extends SupplierForm {
+  id: number;
+}
+
 //Transaction
 export interface TransactionData {
   productId: number;

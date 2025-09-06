@@ -1,10 +1,9 @@
-// import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
-// import { ProtectedRoute, AdminRoute } from "./services/Guard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { AdminRoute } from "./services/Guard";
 import Categories from "./pages/Categories";
+import Suppliers from "./pages/Suppliers";
 
 function App() {
   return (
@@ -18,6 +17,14 @@ function App() {
           element={
             <AdminRoute>
               <Categories />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/suppliers"
+          element={
+            <AdminRoute>
+              <Suppliers />
             </AdminRoute>
           }
         />
