@@ -31,43 +31,43 @@ const Sidebar: FC = () => {
 
         {isAuth && (
           <li>
-            <Link to="/transaction">Transactions</Link>
+            <Link to="/transactions">Transactions</Link>
           </li>
         )}
 
         {isAdmin && (
           <li>
-            <Link to="/category">Category</Link>
+            <Link to="/categories">Category</Link>
           </li>
         )}
 
         {isAdmin && (
           <li>
-            <Link to="/product">Product</Link>
+            <Link to="/products">Product</Link>
           </li>
         )}
 
         {isAdmin && (
           <li>
-            <Link to="/supplier">Supplier</Link>
+            <Link to="/suppliers">Supplier</Link>
           </li>
         )}
 
         {isAuth && (
           <li>
-            <Link to="/purchase">Purchase</Link>
+            <Link to="/purchases">Purchase</Link>
           </li>
         )}
 
         {isAuth && (
           <li>
-            <Link to="/sell">Sell</Link>
+            <Link to="/sales">Sell</Link>
           </li>
         )}
 
         {isAuth && (
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to="/me">Profile</Link>
           </li>
         )}
 
