@@ -5,6 +5,7 @@ import { AdminRoute } from "./services/Guard";
 import Categories from "./pages/Categories";
 import Suppliers from "./pages/Suppliers";
 import AddEditSupplier from "./pages/AddEditSupplier";
+import Product from "./pages/Product";
 
 function App() {
   return (
@@ -42,6 +43,14 @@ function App() {
           element={
             <AdminRoute>
               <AddEditSupplier />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <AdminRoute>
+              <Product />
             </AdminRoute>
           }
         />

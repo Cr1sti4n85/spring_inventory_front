@@ -69,3 +69,20 @@ export interface Category {
   id: number;
   name: string;
 }
+
+//Product
+
+interface ProductForm {
+  name: string;
+  sku: string;
+  price: number;
+  stock: number;
+  description: string;
+  imageFile: File | null; // Single image file
+  categoryId: number;
+  supplierId: number;
+}
+export interface ProductData extends ProductForm {
+  id: number;
+  imageUrl: string; // URL of the uploaded image
+}
