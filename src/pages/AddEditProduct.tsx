@@ -84,16 +84,6 @@ const AddEditProduct: FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const formData = new FormData();
-    // formData.append("name", name);
-    // formData.append("sku", sku);
-    // formData.append("price", price);
-    // formData.append("stock", stock);
-    // formData.append("categoryId", categoryId);
-    // formData.append("description", description);
-    // if (imageFile) {
-    //   formData.append("imageFile", imageFile);
-    // }
     const product: ProductForm = {
       name,
       sku,
