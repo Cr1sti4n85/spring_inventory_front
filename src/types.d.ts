@@ -13,19 +13,6 @@ export interface LoginData {
   password: string;
 }
 
-//Product
-
-export interface ProductForm {
-  name: string;
-  stock: number;
-  imageFile: File | null; // one image
-  price: number;
-  description: string;
-  sku: string;
-  categoryId: string;
-  // image: FileList | null; // in case there are multiple images
-}
-
 //Supplier
 
 export interface SupplierForm {
@@ -75,14 +62,28 @@ export interface Category {
 interface ProductForm {
   name: string;
   sku: string;
-  price: number;
-  stock: number;
+  price: string;
+  stock: string;
   description: string;
   imageFile: File | null; // Single image file
-  categoryId: number;
-  supplierId: number;
+  categoryId: string;
 }
 export interface ProductData extends ProductForm {
   id: number;
   imageName: string; // URL of the uploaded image
+}
+
+export function toFormData(product: ProductForm): FormData {
+  const formData = new FormData();
+  formData.append("name", product.name);
+  formData.append("sku", product.sku);
+  formData.append("price", String(product.price));
+  formData.append("stock", String(product.stock));
+  formData.append("description", product.description);
+  formData.append("categoryId", String(product.categoryId));
+  formData.append("supplierId", String(product.supplierId));
+  if (product.imageFile) {
+    formData.append("imageFile", product.imageFile);
+  }
+  return formData;
 }

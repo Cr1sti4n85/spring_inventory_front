@@ -1,14 +1,16 @@
 import axios, { type AxiosResponse } from "axios";
 import CryptoUtil from "./CryptoService";
-import type {
-  CategoryData,
-  LoginData,
-  RegisterData,
-  SupplierForm,
-  SupplierResponse,
-  SuppliersResponse,
-  TransactionData,
-} from "../types";
+import {
+  type CategoryData,
+  type LoginData,
+  type ProductForm,
+  type RegisterData,
+  type SupplierForm,
+  type SupplierResponse,
+  type SuppliersResponse,
+  type TransactionData,
+} from "../types.d";
+import { toFormData } from "../utils/productToForm";
 
 export default class ApiService {
   static BASE_URL = import.meta.env.VITE_API_URL;
@@ -110,7 +112,8 @@ export default class ApiService {
 
   /**PRODUCT ENDPOINTS */
 
-  static async addProduct(formData: FormData) {
+  static async addProduct(product: ProductForm) {
+    const formData = toFormData(product);
     const response = await axios.post(`${this.BASE_URL}/products`, formData, {
       headers: {
         ...(await this.getHeader()),
@@ -120,7 +123,8 @@ export default class ApiService {
     return response.data;
   }
 
-  static async updateProduct(formData: FormData) {
+  static async updateProduct(product: ProductForm & { id: number }) {
+    const formData = toFormData(product);
     const response = await axios.put(`${this.BASE_URL}/products`, formData, {
       headers: {
         ...(await this.getHeader()),

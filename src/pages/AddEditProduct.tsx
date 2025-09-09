@@ -1,6 +1,6 @@
 import { useEffect, useState, type FC } from "react";
 import { useNavigate, useParams } from "react-router";
-import type { Category } from "../types";
+import type { Category, ProductForm } from "../types";
 import ApiService from "../services/ApiService";
 import axios from "axios";
 import Layout from "../components/Layout";
@@ -44,10 +44,10 @@ const AddEditProduct: FC = () => {
             setName(productData.product.name);
             setSku(productData.product.sku);
             setPrice(productData.product.price);
-            setStock(productData.product.stockQuantity);
+            setStock(productData.product.stock);
             setCategoryId(productData.product.categoryId);
             setDescription(productData.product.description);
-            setImageUrl(productData.product.imageName);
+            setImageUrl(productData.product.imageUrl);
           } else {
             showMessage(productData.message);
           }
@@ -84,24 +84,31 @@ const AddEditProduct: FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("sku", sku);
-    formData.append("price", price);
-    formData.append("stockQuantity", stock);
-    formData.append("categoryId", categoryId);
-    formData.append("description", description);
-    if (imageFile) {
-      formData.append("imageFile", imageFile);
-    }
-
+    // const formData = new FormData();
+    // formData.append("name", name);
+    // formData.append("sku", sku);
+    // formData.append("price", price);
+    // formData.append("stock", stock);
+    // formData.append("categoryId", categoryId);
+    // formData.append("description", description);
+    // if (imageFile) {
+    //   formData.append("imageFile", imageFile);
+    // }
+    const product: ProductForm = {
+      name,
+      sku,
+      price,
+      stock,
+      categoryId,
+      description,
+      imageFile,
+    };
     try {
       if (isEditing && productId) {
-        formData.append("productId", productId);
-        await ApiService.updateProduct(formData);
+        await ApiService.updateProduct({ ...product, id: +productId });
         showMessage("Producto actualizado con éxito 🤩");
       } else {
-        await ApiService.addProduct(formData);
+        await ApiService.addProduct(product);
         showMessage("Product guardado con éxito 🤩");
       }
       navigate("/products");
