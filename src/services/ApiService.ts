@@ -3,7 +3,6 @@ import CryptoUtil from "./CryptoService";
 import type {
   CategoryData,
   LoginData,
-  ProductForm,
   RegisterData,
   SupplierForm,
   SupplierResponse,
@@ -111,7 +110,7 @@ export default class ApiService {
 
   /**PRODUCT ENDPOINTS */
 
-  static async addProduct(formData: ProductForm) {
+  static async addProduct(formData: FormData) {
     const response = await axios.post(`${this.BASE_URL}/products`, formData, {
       headers: {
         ...(await this.getHeader()),
@@ -121,7 +120,7 @@ export default class ApiService {
     return response.data;
   }
 
-  static async updateProduct(formData: ProductForm) {
+  static async updateProduct(formData: FormData) {
     const response = await axios.put(`${this.BASE_URL}/products`, formData, {
       headers: {
         ...(await this.getHeader()),

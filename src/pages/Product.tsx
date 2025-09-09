@@ -7,6 +7,7 @@ import Layout from "../components/Layout";
 import Pagination from "../components/Pagination";
 
 const Product: FC = () => {
+  const IMAGES_URL = import.meta.env.VITE_IMAGES_URL;
   const [products, setProducts] = useState<ProductData[]>([]);
   const [message, setMessage] = useState<string>("");
 
@@ -90,7 +91,7 @@ const Product: FC = () => {
               <div key={product.id} className="product-item">
                 <img
                   className="product-image"
-                  src={product.imageUrl}
+                  src={`${IMAGES_URL}${product.imageName}`}
                   alt={product.name}
                 />
 

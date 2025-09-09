@@ -6,6 +6,7 @@ import Categories from "./pages/Categories";
 import Suppliers from "./pages/Suppliers";
 import AddEditSupplier from "./pages/AddEditSupplier";
 import Product from "./pages/Product";
+import AddEditProduct from "./pages/AddEditProduct";
 
 function App() {
   return (
@@ -51,6 +52,23 @@ function App() {
           element={
             <AdminRoute>
               <Product />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/add-product"
+          element={
+            <AdminRoute>
+              <AddEditProduct />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/edit-product/:productId"
+          element={
+            <AdminRoute>
+              <AddEditProduct />
             </AdminRoute>
           }
         />

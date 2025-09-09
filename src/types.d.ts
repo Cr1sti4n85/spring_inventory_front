@@ -84,5 +84,5 @@ interface ProductForm {
 }
 export interface ProductData extends ProductForm {
   id: number;
-  imageUrl: string; // URL of the uploaded image
+  imageName: string; // URL of the uploaded image
 }
