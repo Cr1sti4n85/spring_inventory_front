@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import { AdminRoute } from "./services/Guard";
+import { AdminRoute, ProtectedRoute } from "./services/Guard";
 import Categories from "./pages/Categories";
 import Suppliers from "./pages/Suppliers";
 import AddEditSupplier from "./pages/AddEditSupplier";
@@ -76,9 +76,9 @@ function App() {
         <Route
           path="/purchases"
           element={
-            <AdminRoute>
+            <ProtectedRoute>
               <Purchase />
-            </AdminRoute>
+            </ProtectedRoute>
           }
         />
       </Routes>
