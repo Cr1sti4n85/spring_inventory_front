@@ -8,6 +8,7 @@ import AddEditSupplier from "./pages/AddEditSupplier";
 import Product from "./pages/Product";
 import AddEditProduct from "./pages/AddEditProduct";
 import Purchase from "./pages/Purchase";
+import Sales from "./pages/Sales";
 
 function App() {
   return (
@@ -78,6 +79,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Purchase />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/sales"
+          element={
+            <ProtectedRoute>
+              <Sales />
             </ProtectedRoute>
           }
         />
