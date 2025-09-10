@@ -25,49 +25,49 @@ const Sidebar: FC = () => {
       <ul className="nav-links">
         {isAuth && (
           <li>
-            <Link to="/dashboard">Dashboaard</Link>
+            <Link to="/dashboard">Dashboard</Link>
           </li>
         )}
 
         {isAuth && (
           <li>
-            <Link to="/transactions">Transactions</Link>
+            <Link to="/transactions">Transacciones</Link>
           </li>
         )}
 
         {isAdmin && (
           <li>
-            <Link to="/categories">Category</Link>
+            <Link to="/categories">Categorías</Link>
           </li>
         )}
 
         {isAdmin && (
           <li>
-            <Link to="/products">Product</Link>
+            <Link to="/products">Productos</Link>
           </li>
         )}
 
         {isAdmin && (
           <li>
-            <Link to="/suppliers">Supplier</Link>
+            <Link to="/suppliers">Proveedores</Link>
           </li>
         )}
 
         {isAuth && (
           <li>
-            <Link to="/purchases">Purchase</Link>
+            <Link to="/purchases">Compras</Link>
           </li>
         )}
 
         {isAuth && (
           <li>
-            <Link to="/sales">Sell</Link>
+            <Link to="/sales">Ventas</Link>
           </li>
         )}
 
         {isAuth && (
           <li>
-            <Link to="/me">Profile</Link>
+            <Link to="/me">Perfil</Link>
           </li>
         )}
 

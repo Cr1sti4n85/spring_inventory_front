@@ -39,9 +39,9 @@ export interface SupplierResponse {
 
 //Transaction
 export interface TransactionData {
-  productId: number;
+  productId: string;
   quantity: number;
-  supplierId?: number; // Optional for sales
+  supplierId?: string; // Optional for sales
   description?: string;
   note?: string;
   status?: string; //for updates

@@ -7,6 +7,7 @@ import Suppliers from "./pages/Suppliers";
 import AddEditSupplier from "./pages/AddEditSupplier";
 import Product from "./pages/Product";
 import AddEditProduct from "./pages/AddEditProduct";
+import Purchase from "./pages/Purchase";
 
 function App() {
   return (
@@ -69,6 +70,14 @@ function App() {
           element={
             <AdminRoute>
               <AddEditProduct />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/purchases"
+          element={
+            <AdminRoute>
+              <Purchase />
             </AdminRoute>
           }
         />
