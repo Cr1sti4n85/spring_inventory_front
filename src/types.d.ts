@@ -67,6 +67,7 @@ interface ProductForm {
   description: string;
   imageFile: File | null; // Single image file
   categoryId: string;
+  productId?: number;
 }
 export interface ProductData extends ProductForm {
   id: number;

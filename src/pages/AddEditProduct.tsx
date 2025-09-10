@@ -95,7 +95,7 @@ const AddEditProduct: FC = () => {
     };
     try {
       if (isEditing && productId) {
-        await ApiService.updateProduct({ ...product, id: +productId });
+        await ApiService.updateProduct({ ...product, productId: +productId });
         showMessage("Producto actualizado con éxito 🤩");
       } else {
         await ApiService.addProduct(product);

@@ -123,7 +123,7 @@ export default class ApiService {
     return response.data;
   }
 
-  static async updateProduct(product: ProductForm & { id: number }) {
+  static async updateProduct(product: ProductForm) {
     const formData = toFormData(product);
     const response = await axios.put(`${this.BASE_URL}/products`, formData, {
       headers: {
