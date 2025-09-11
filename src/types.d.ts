@@ -47,6 +47,21 @@ export interface TransactionData {
   status?: string; //for updates
 }
 
+export interface Transaction {
+  id: number;
+  transactionType: string;
+  status: string;
+  totalPrice: number;
+  totalProducts: number;
+  createdAt: string;
+}
+
+export interface TransactionResponse {
+  status: number;
+  message: string;
+  transactions: Transaction[];
+}
+
 //Category
 export interface CategoryData {
   name: string;

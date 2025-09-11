@@ -9,6 +9,7 @@ import Product from "./pages/Product";
 import AddEditProduct from "./pages/AddEditProduct";
 import Purchase from "./pages/Purchase";
 import Sales from "./pages/Sales";
+import Transactions from "./pages/Transactions";
 
 function App() {
   return (
@@ -87,6 +88,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Sales />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/transactions"
+          element={
+            <ProtectedRoute>
+              <Transactions />
             </ProtectedRoute>
           }
         />
