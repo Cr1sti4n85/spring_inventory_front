@@ -101,7 +101,7 @@ const Transactions = () => {
             <tbody>
               {transactions.map((transaction) => (
                 <tr key={transaction.id}>
-                  <td>{transaction.transactionType}</td>
+                  <td>{transaction.type}</td>
                   <td>{transaction.status}</td>
                   <td>{transaction.totalPrice}</td>
                   <td>{transaction.totalProducts}</td>

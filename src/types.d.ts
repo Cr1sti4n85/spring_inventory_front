@@ -49,7 +49,7 @@ export interface TransactionData {
 
 export interface Transaction {
   id: number;
-  transactionType: string;
+  type: string;
   status: string;
   totalPrice: number;
   totalProducts: number;
