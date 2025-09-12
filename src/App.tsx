@@ -10,6 +10,7 @@ import AddEditProduct from "./pages/AddEditProduct";
 import Purchase from "./pages/Purchase";
 import Sales from "./pages/Sales";
 import Transactions from "./pages/Transactions";
+import TransactionDetails from "./pages/TransactionDetails";
 
 function App() {
   return (
@@ -96,6 +97,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Transactions />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/transactions/:transactionId"
+          element={
+            <ProtectedRoute>
+              <TransactionDetails />
             </ProtectedRoute>
           }
         />

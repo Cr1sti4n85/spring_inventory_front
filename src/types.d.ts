@@ -54,6 +54,12 @@ export interface Transaction {
   totalPrice: number;
   totalProducts: number;
   createdAt: string;
+  updatedAt?: string;
+  description?: string;
+  note?: string;
+  product: ProductData;
+  user: RegisterData;
+  supplier: Supplier;
 }
 
 export interface TransactionResponse {
@@ -77,7 +83,7 @@ export interface Category {
 interface ProductForm {
   name: string;
   sku: string;
-  price: string;
+  price: number;
   stock: string;
   description: string;
   imageFile: File | null; // Single image file
