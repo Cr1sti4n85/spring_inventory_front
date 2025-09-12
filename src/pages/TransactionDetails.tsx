@@ -6,6 +6,7 @@ import axios from "axios";
 import Layout from "../components/Layout";
 
 const TransactionDetails = () => {
+  const IMAGES_URL = import.meta.env.VITE_IMAGES_URL;
   const { transactionId } = useParams();
   const [transaction, setTransaction] = useState<Transaction | null>(null);
   const [message, setMessage] = useState<string>("");
@@ -99,13 +100,13 @@ const TransactionDetails = () => {
               <h2>Información del producto</h2>
               <p>Nombre: {transaction.product.name}</p>
               <p>SKU: {transaction.product.sku}</p>
-              <p>Precio: {transaction.product.price.toFixed(2)}</p>
+              <p>Precio: {Number(transaction.product.price).toFixed(2)}</p>
               <p>Stock: {transaction.product.stock}</p>
               <p>Descripción: {transaction.product.description}</p>
 
               {transaction.product.imageName && (
                 <img
-                  src={transaction.product.imageName}
+                  src={`${IMAGES_URL}${transaction.product.imageName}`}
                   alt={transaction.product.name}
                 />
               )}
@@ -113,7 +114,7 @@ const TransactionDetails = () => {
 
             {/* User information who made the transaction */}
             <div className="section-card">
-              <h2>Información de ususario</h2>
+              <h2>Información de usuario</h2>
               <p>Nombre: {transaction.user.name}</p>
               <p>Email: {transaction.user.email}</p>
               <p>Teléfono: {transaction.user.phoneNumber}</p>

@@ -83,7 +83,7 @@ export interface Category {
 interface ProductForm {
   name: string;
   sku: string;
-  price: number;
+  price: string;
   stock: string;
   description: string;
   imageFile: File | null; // Single image file
