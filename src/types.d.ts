@@ -13,6 +13,16 @@ export interface LoginData {
   password: string;
 }
 
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  phoneNumber?: string;
+  role: string;
+  createdAt: string;
+  updatedAt?: string;
+}
+
 //Supplier
 
 export interface SupplierForm {
@@ -58,7 +68,7 @@ export interface Transaction {
   description?: string;
   note?: string;
   product: ProductData;
-  user: RegisterData;
+  user: User;
   supplier: Supplier;
 }
 

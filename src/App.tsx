@@ -11,6 +11,7 @@ import Purchase from "./pages/Purchase";
 import Sales from "./pages/Sales";
 import Transactions from "./pages/Transactions";
 import TransactionDetails from "./pages/TransactionDetails";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -105,6 +106,14 @@ function App() {
           element={
             <ProtectedRoute>
               <TransactionDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           }
         />

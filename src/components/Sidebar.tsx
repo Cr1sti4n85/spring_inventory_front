@@ -67,7 +67,7 @@ const Sidebar: FC = () => {
 
         {isAuth && (
           <li>
-            <Link to="/me">Perfil</Link>
+            <Link to="/profile">Perfil</Link>
           </li>
         )}
 
