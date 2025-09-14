@@ -878,6 +878,60 @@ button[type="submit"]:hover {
   }
 }
 
+/* DASHBOARD STYLING */
+
+.filter-section {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#month-select,
+#year-select {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.chart-container {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  height: 500px;
+}
+
+.dashboard-page {
+  padding: 20px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.button-group button {
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: #008080;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.button-group button:hover {
+  background-color: #2f4f4f;
+}
+
+.button-group button.active {
+  background-color: #2f4f4f;
+}
+
 /* General button styles */
 button {
   padding: 10px 15px;
