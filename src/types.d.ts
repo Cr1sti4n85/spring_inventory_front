@@ -104,3 +104,10 @@ export interface ProductData extends ProductForm {
   id: number;
   imageName: string; // URL of the uploaded image
 }
+
+export type DailyData = {
+  day: number;
+  count: number;
+  quantity: number;
+  amount: number;
+};

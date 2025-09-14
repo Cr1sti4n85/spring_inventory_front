@@ -12,6 +12,7 @@ import Sales from "./pages/Sales";
 import Transactions from "./pages/Transactions";
 import TransactionDetails from "./pages/TransactionDetails";
 import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -114,6 +115,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
             </ProtectedRoute>
           }
         />

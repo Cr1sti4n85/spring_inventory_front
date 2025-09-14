@@ -299,7 +299,7 @@ export default class ApiService {
     return response.data;
   }
 
-  static async getAllTransactions(filter: string) {
+  static async getAllTransactions(filter?: string) {
     const response = await axios.get(`${this.BASE_URL}/transactions`, {
       headers: await this.getHeader(),
       params: { filter },
