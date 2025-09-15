@@ -7,9 +7,18 @@ type ProtectedRouteProps = {
 };
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const auth = ApiService.isAuthenticated();
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
+  useEffect(() => {
+    const checkAuth = async () => {
+      const result = await ApiService.isAuthenticated();
+      setIsAuth(result);
+    };
+
+    checkAuth();
+  }, []);
   const location = useLocation();
-  return auth ? (
+
+  return isAuth ? (
     children
   ) : (
     <Navigate to="/login" replace state={{ from: location }} />

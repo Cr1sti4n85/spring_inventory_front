@@ -30,7 +30,9 @@ export default class ApiService {
 
   static async getToken() {
     const encryptedToken = localStorage.getItem("auth_token");
-    return encryptedToken ? await this.decrypt(encryptedToken) : null;
+    if (!encryptedToken) return null;
+    const token = await this.decrypt(encryptedToken);
+    return token;
   }
 
   static async saveRole(role: string) {
@@ -350,8 +352,8 @@ export default class ApiService {
     this.clearStorage();
   }
 
-  static isAuthenticated() {
-    const token = this.getToken();
+  static async isAuthenticated() {
+    const token = await this.getToken();
     return !!token;
   }
 

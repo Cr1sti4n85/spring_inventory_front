@@ -13,6 +13,7 @@ import Transactions from "./pages/Transactions";
 import TransactionDetails from "./pages/TransactionDetails";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -119,13 +120,14 @@ function App() {
           }
         />
         <Route
-          path="/dashboard"
+          path="/"
           element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
