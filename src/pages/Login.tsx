@@ -20,7 +20,7 @@ const Login: FC = () => {
         ApiService.saveToken(res.token);
         ApiService.saveRole(res.role);
         setMessage(res.message);
-        navigate("/dashboard");
+        navigate("/");
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {

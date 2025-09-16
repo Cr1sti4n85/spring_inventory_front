@@ -9,13 +9,17 @@ type ProtectedRouteProps = {
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    setIsLoading(true);
     const checkAuth = async () => {
       try {
         const result = await ApiService.isAuthenticated();
         setIsAuth(result);
       } catch {
         setIsAuth(false);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -23,7 +27,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   }, []);
   const location = useLocation();
 
-  return isAuth === null ? (
+  return isLoading ? (
     <Loader text="Cargando" />
   ) : isAuth ? (
     children
@@ -34,14 +38,18 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
 export const AdminRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     const checkAdmin = async () => {
       try {
         const result = await ApiService.isAdmin();
         setIsAdmin(result);
       } catch {
         setIsAdmin(false);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -50,7 +58,7 @@ export const AdminRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   const location = useLocation();
 
-  return isAdmin === null ? (
+  return isLoading ? (
     <Loader text="Cargando" />
   ) : isAdmin ? (
     children
