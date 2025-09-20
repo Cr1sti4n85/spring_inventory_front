@@ -6,7 +6,6 @@ import axios from "axios";
 import Layout from "../components/Layout";
 
 const TransactionDetails = () => {
-  const IMAGES_URL = import.meta.env.VITE_IMAGES_URL;
   const { transactionId } = useParams();
   const [transaction, setTransaction] = useState<Transaction | null>(null);
   const [message, setMessage] = useState<string>("");
@@ -106,7 +105,7 @@ const TransactionDetails = () => {
 
               {transaction.product.imageName && (
                 <img
-                  src={`${IMAGES_URL}${transaction.product.imageName}`}
+                  src={transaction.product.imageName}
                   alt={transaction.product.name}
                 />
               )}

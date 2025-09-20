@@ -8,12 +8,14 @@ const logout = () => {
 
 const Sidebar: FC = () => {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const isAuth: boolean = ApiService.isAuthenticated(); // si este es síncrono
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
 
   useEffect(() => {
     const checkAdmin = async () => {
-      const result = await ApiService.isAdmin();
-      setIsAdmin(result);
+      const resultAdmin: boolean = await ApiService.isAdmin();
+      const resultIsAuth: boolean = await ApiService.isAuthenticated();
+      setIsAdmin(resultAdmin);
+      setIsAuth(resultIsAuth);
     };
 
     checkAdmin();
@@ -25,7 +27,7 @@ const Sidebar: FC = () => {
       <ul className="nav-links">
         {isAuth && (
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/">Dashboard</Link>
           </li>
         )}
 

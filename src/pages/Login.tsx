@@ -17,8 +17,8 @@ const Login: FC = () => {
       const res = await ApiService.loginUser(loginData);
 
       if (res.status === 200) {
-        ApiService.saveToken(res.token);
-        ApiService.saveRole(res.role);
+        await ApiService.saveToken(res.token);
+        await ApiService.saveRole(res.role);
         setMessage(res.message);
         navigate("/");
       }
