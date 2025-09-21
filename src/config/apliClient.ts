@@ -8,10 +8,14 @@ import type {
 import axios from "axios";
 import ApiService from "../services/ApiService";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const options: CreateAxiosDefaults = {
-  baseURL: "http://localhost:8080/api",
+  baseURL:
+    import.meta.env.MODE === "development"
+      ? "http://localhost:8080/api"
+      : BASE_URL,
   withCredentials: true,
-  httpsAgent: false,
 };
 
 //creation of new axios instance in order to avoid loops
@@ -40,8 +44,7 @@ API.interceptors.response.use(
           Authorization: `Bearer ${newAccessToken}`,
         } as AxiosRequestHeaders;
         return API(config);
-      } catch (error) {
-        console.log(error);
+      } catch {
         window.location.href = "/login";
       }
     }
