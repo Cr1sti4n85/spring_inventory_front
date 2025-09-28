@@ -51,11 +51,11 @@ const AddEditSupplier: FC = () => {
         }
         await ApiService.updateSupplier(+supplierId, supplierData);
         showMessage("Proveedor actualizado con éxito");
-        navigate("/supplier");
+        navigate("/suppliers");
       } else {
         await ApiService.addSupplier(supplierData);
         showMessage("Proveedor agregado con éxito");
-        navigate("/supplier");
+        navigate("/suppliers");
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {

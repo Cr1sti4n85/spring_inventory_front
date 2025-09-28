@@ -2,16 +2,19 @@ import { useState, type FC } from "react";
 import { useNavigate } from "react-router";
 import ApiService from "../services/ApiService";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 const Login: FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const loginData = { email, password };
       const res = await ApiService.loginUser(loginData);
@@ -61,7 +64,13 @@ const Login: FC = () => {
           required
         />
 
-        <button type="submit">Iniciar sesión</button>
+        <button type="submit">
+          {isLoading ? (
+            <Loader size={24} cssClass="loading-wrapper" />
+          ) : (
+            "Iniciar sesión"
+          )}
+        </button>
       </form>
       <p>
         ¿No tienes cuenta? <a href="/register">Registrarse</a>

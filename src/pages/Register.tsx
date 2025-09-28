@@ -2,6 +2,7 @@ import { useState, type FC } from "react";
 import { useNavigate } from "react-router";
 import ApiService from "../services/ApiService";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 const Register: FC = () => {
   const [name, setName] = useState<string>("");
@@ -9,11 +10,13 @@ const Register: FC = () => {
   const [password, setPassword] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const registerData = { name, email, password, phoneNumber };
       await ApiService.registerUser(registerData);
@@ -74,7 +77,13 @@ const Register: FC = () => {
           required
         />
 
-        <button type="submit">Enviar</button>
+        <button type="submit">
+          {isLoading ? (
+            <Loader size={24} cssClass="loading-wrapper" />
+          ) : (
+            "Enviar"
+          )}
+        </button>
       </form>
       <p>
         ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>

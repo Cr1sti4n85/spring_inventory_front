@@ -3,12 +3,15 @@ import ApiService from "../services/ApiService";
 import axios from "axios";
 import type { User } from "../types";
 import Layout from "../components/Layout";
+import Loader from "../components/Loader";
 
 const Profile = () => {
   const [user, setUser] = useState<User | null>(null);
   const [message, setMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchUserInfo = async () => {
       try {
         const userInfo = await ApiService.getLoggedInUserInfo();
@@ -19,6 +22,8 @@ const Profile = () => {
         } else {
           showMessage("Error al registrar usuario: " + error);
         }
+      } finally {
+        setLoading(false);
       }
     };
     fetchUserInfo();
@@ -32,7 +37,9 @@ const Profile = () => {
     }, 4000);
   };
 
-  return (
+  return loading ? (
+    <Loader size={60} cssClass="loader-container" />
+  ) : (
     <Layout>
       {message && <div className="message">{message}</div>}
       <div className="profile-page">

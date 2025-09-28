@@ -5,12 +5,14 @@ import ApiService from "../services/ApiService";
 import Pagination from "../components/Pagination";
 import Layout from "../components/Layout";
 import type { Transaction, TransactionResponse } from "../types";
+import Loader from "../components/Loader";
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [message, setMessage] = useState<string>("");
   const [filter, setFilter] = useState<string>("");
   const [valueToSearch, setValueToSearch] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -20,6 +22,7 @@ const Transactions = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
+    setLoading(true);
     const getTransactions = async () => {
       try {
         const transactionData: TransactionResponse =
@@ -43,6 +46,8 @@ const Transactions = () => {
         } else {
           showMessage("Error al obtener las transacciones: " + error);
         }
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -68,7 +73,9 @@ const Transactions = () => {
     navigate(`/transactions/${transactionId}`);
   };
 
-  return (
+  return loading ? (
+    <Loader size={60} cssClass="loader-container" />
+  ) : (
     <Layout>
       {message && <p className="message">{message}</p>}
       <div className="transactions-page">

@@ -4,13 +4,16 @@ import ApiService from "../services/ApiService";
 import axios from "axios";
 import Layout from "../components/Layout";
 import type { Supplier } from "../types";
+import Loader from "../components/Loader";
 
 const Suppliers = () => {
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [message, setMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     //fetch all suppliers
     const getSuppliers = async () => {
       try {
@@ -26,6 +29,8 @@ const Suppliers = () => {
         } else {
           showMessage("Error al obtener proveedores: " + error);
         }
+      } finally {
+        setLoading(false);
       }
     };
     getSuppliers();
@@ -53,15 +58,17 @@ const Suppliers = () => {
       }
     }
   };
-  return (
+  return loading ? (
+    <Loader size={60} cssClass="loader-container" />
+  ) : (
     <Layout>
       {message && <div className="message">{message}</div>}
       <div className="supplier-page">
         <div className="supplier-header">
-          <h1>Suppliers</h1>
+          <h1>Proveedores</h1>
           <div className="add-sup">
             <button onClick={() => navigate("/add-supplier")}>
-              Add Supplier
+              Agregar Proveedor
             </button>
           </div>
         </div>

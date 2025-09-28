@@ -5,10 +5,12 @@ import ApiService from "../services/ApiService";
 import axios from "axios";
 import Layout from "../components/Layout";
 import Pagination from "../components/Pagination";
+import Loader from "../components/Loader";
 
 const Product: FC = () => {
   const [products, setProducts] = useState<ProductData[]>([]);
   const [message, setMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -18,6 +20,7 @@ const Product: FC = () => {
   const itemsPerPage: number = 10;
 
   useEffect(() => {
+    setLoading(true);
     const getProducts = async () => {
       try {
         const productData = await ApiService.getAllProducts();
@@ -38,6 +41,8 @@ const Product: FC = () => {
         } else {
           showMessage("Error al obtener productos: " + error);
         }
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -69,7 +74,9 @@ const Product: FC = () => {
     }, 4000);
   };
 
-  return (
+  return loading ? (
+    <Loader size={60} cssClass="loader-container" />
+  ) : (
     <Layout>
       {message && <div className="message">{message}</div>}
 

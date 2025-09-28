@@ -3,6 +3,7 @@ import ApiService from "../services/ApiService";
 import type { Category } from "../types";
 import axios from "axios";
 import Layout from "../components/Layout";
+import Loader from "../components/Loader";
 
 const Categories: FC = () => {
   const [categories, setCategories] = useState([]);
@@ -12,10 +13,10 @@ const Categories: FC = () => {
   const [editingCategoryId, setEditingCategoryId] = useState<number | null>(
     null
   );
-
-  //fetcg the categories form our backend
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     const getCategories = async () => {
       try {
         const response = await ApiService.getAllCategory();
@@ -28,6 +29,8 @@ const Categories: FC = () => {
         } else {
           showMessage("Error al iniciar sesión: " + error);
         }
+      } finally {
+        setLoading(false);
       }
     };
     getCategories();
@@ -101,7 +104,9 @@ const Categories: FC = () => {
     }, 4000);
   };
 
-  return (
+  return loading ? (
+    <Loader size={60} cssClass="loader-container" />
+  ) : (
     <Layout>
       {message && <div className="message">{message}</div>}
       <div className="category-page">
