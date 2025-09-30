@@ -137,17 +137,20 @@
 
 /*REGISTER-LOGIN*/
 .auth-container {
-  width: 500px;
-  margin: 8rem auto;
+  width: 100%;
+  max-width: 500px;
+  margin: 4rem auto;
   padding: 20px;
   border: 1px solid #eee;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .auth-container h2 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
 .auth-container form {
@@ -156,9 +159,9 @@
 }
 
 .auth-container input {
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 18px;
+  margin-bottom: 12px;
+  padding: 12px;
+  font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -171,8 +174,9 @@ button[type="submit"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   margin: 20px auto;
+  transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
@@ -182,6 +186,33 @@ button[type="submit"]:hover {
 .auth-container button:hover {
   background-color: #2f4f4f;
 }
+
+@media (max-width: 600px) {
+  .auth-container {
+    margin: 2rem auto;
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  .auth-container h2 {
+    font-size: 1.25rem;
+  }
+
+  .auth-container input {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  button[type="submit"] {
+    font-size: 0.95rem;
+    padding: 0.9rem;
+  }
+
+  .auth-container p {
+    text-align: center; /* centra el texto de registro */
+  }
+}
+
 /*MESSAGE*/
 .message {
   background-color: #d4edda;
