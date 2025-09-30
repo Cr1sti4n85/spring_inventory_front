@@ -9,6 +9,9 @@ const logout = () => {
 const Sidebar: FC = () => {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const toggleSidebar = (): void => setIsOpen(!isOpen);
 
   useEffect(() => {
     const checkAdmin = async () => {
@@ -22,66 +25,93 @@ const Sidebar: FC = () => {
   }, []);
 
   return (
-    <div className="sidebar">
-      <h1 className="ims">IMS</h1>
-      <ul className="nav-links">
-        {isAuth && (
-          <li>
-            <Link to="/">Dashboard</Link>
-          </li>
-        )}
+    <>
+      <button className="hamburger" onClick={toggleSidebar}>
+        ☰
+      </button>
+      <div className={`sidebar ${isOpen ? "open" : ""}`}>
+        <h1 className="ims">IMS</h1>
+        <ul className="nav-links">
+          {isAuth && (
+            <li>
+              <Link to="/" onClick={() => setIsOpen(false)}>
+                Dashboard
+              </Link>
+            </li>
+          )}
 
-        {isAuth && (
-          <li>
-            <Link to="/transactions">Transacciones</Link>
-          </li>
-        )}
+          {isAuth && (
+            <li>
+              <Link to="/transactions" onClick={() => setIsOpen(false)}>
+                Transacciones
+              </Link>
+            </li>
+          )}
 
-        {isAdmin && (
-          <li>
-            <Link to="/categories">Categorías</Link>
-          </li>
-        )}
+          {isAdmin && (
+            <li>
+              <Link to="/categories" onClick={() => setIsOpen(false)}>
+                Categorías
+              </Link>
+            </li>
+          )}
 
-        {isAdmin && (
-          <li>
-            <Link to="/products">Productos</Link>
-          </li>
-        )}
+          {isAdmin && (
+            <li>
+              <Link to="/products" onClick={() => setIsOpen(false)}>
+                Productos
+              </Link>
+            </li>
+          )}
 
-        {isAdmin && (
-          <li>
-            <Link to="/suppliers">Proveedores</Link>
-          </li>
-        )}
+          {isAdmin && (
+            <li>
+              <Link to="/suppliers" onClick={() => setIsOpen(false)}>
+                Proveedores
+              </Link>
+            </li>
+          )}
 
-        {isAuth && (
-          <li>
-            <Link to="/purchases">Compras</Link>
-          </li>
-        )}
+          {isAuth && (
+            <li>
+              <Link to="/purchases" onClick={() => setIsOpen(false)}>
+                Compras
+              </Link>
+            </li>
+          )}
 
-        {isAuth && (
-          <li>
-            <Link to="/sales">Ventas</Link>
-          </li>
-        )}
+          {isAuth && (
+            <li>
+              <Link to="/sales" onClick={() => setIsOpen(false)}>
+                Ventas
+              </Link>
+            </li>
+          )}
 
-        {isAuth && (
-          <li>
-            <Link to="/profile">Perfil</Link>
-          </li>
-        )}
+          {isAuth && (
+            <li>
+              <Link to="/profile" onClick={() => setIsOpen(false)}>
+                Perfil
+              </Link>
+            </li>
+          )}
 
-        {isAuth && (
-          <li>
-            <Link onClick={logout} to="/login">
-              Logout
-            </Link>
-          </li>
-        )}
-      </ul>
-    </div>
+          {isAuth && (
+            <li>
+              <Link
+                onClick={() => {
+                  logout();
+                  setIsOpen(false);
+                }}
+                to="/login"
+              >
+                Logout
+              </Link>
+            </li>
+          )}
+        </ul>
+      </div>
+    </>
   );
 };
 export default Sidebar;
