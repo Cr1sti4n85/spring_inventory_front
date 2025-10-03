@@ -82,12 +82,12 @@ const Product: FC = () => {
 
       <div className="product-page">
         <div className="product-header">
-          <h1>Products</h1>
+          <h1>Productos</h1>
           <button
             className="add-product-btn"
             onClick={() => navigate("/add-product")}
           >
-            Add Product
+            Agregar Product
           </button>
         </div>
 

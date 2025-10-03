@@ -93,40 +93,42 @@ const Transactions = () => {
         </div>
 
         {transactions && (
-          <table className="transactions-table">
-            <thead>
-              <tr>
-                <th>Tipo</th>
-                <th>Status</th>
-                <th>Precio total</th>
-                <th>Total de productos</th>
-                <th>Fecha</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {transactions.map((transaction) => (
-                <tr key={transaction.id}>
-                  <td>{transaction.type}</td>
-                  <td>{transaction.status}</td>
-                  <td>{transaction.totalPrice}</td>
-                  <td>{transaction.totalProducts}</td>
-                  <td>{new Date(transaction.createdAt).toLocaleString()}</td>
-
-                  <td>
-                    <button
-                      onClick={() =>
-                        navigateToTransactionDetailsPage(transaction.id)
-                      }
-                    >
-                      Ver detalles
-                    </button>
-                  </td>
+          <div className="transactions-table-container">
+            <table className="transactions-table">
+              <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Status</th>
+                  <th>Precio total</th>
+                  <th>Total de productos</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {transactions.map((transaction) => (
+                  <tr key={transaction.id}>
+                    <td>{transaction.type}</td>
+                    <td>{transaction.status}</td>
+                    <td>{transaction.totalPrice}</td>
+                    <td>{transaction.totalProducts}</td>
+                    <td>{new Date(transaction.createdAt).toLocaleString()}</td>
+
+                    <td>
+                      <button
+                        onClick={() =>
+                          navigateToTransactionDetailsPage(transaction.id)
+                        }
+                      >
+                        Ver detalles
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
 
